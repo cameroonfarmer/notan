@@ -1,0 +1,145 @@
+<script>
+        function openVideo() {
+            window.open('https://www.youtube.com/watch?v=m94d69W3opg', '_blank');
+        }
+        
+        // Check if iframe is blocked and show fallback
+        setTimeout(() => {
+            const iframe = document.querySelector('iframe');
+            const fallback = document.querySelector('.video-fallback');
+            
+            try {
+                // If iframe is blocked, show fallback
+                if (!iframe.contentDocument && !iframe.contentWindow) {
+                    iframe.style.display = 'none';
+                    fallback.style.display = 'flex';
+                }
+            } catch (e) {
+                // If we can't access iframe, show fallback
+                iframe.style.display = 'none';
+                fallback.style.display = 'flex';
+            }
+        }, 1000);
+    </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .subscribe-button {
+            padding: 20px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: normal;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .subscribe-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .subscribe-button {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="video-container" onclick="openVideo()">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/m94d69W3opg" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"
+                style="display: block;">
+            </iframe>
+            <!-- Fallback for environments that block embeds -->
+            <div class="video-fallback" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #667eea, #764ba2); display: none; align-items: center; justify-content: center; color: white; text-align: center; cursor: pointer; border-radius: 20px;">
+                <div>
+                    <div style="font-size: 4rem; margin-bottom: 20px;">▶️</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px;">Click to Watch Video</div>
+                    <div style="font-size: 1rem; opacity: 0.9;">Opens in new tab</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="https://naen.beehiiv.com/subscribe" class="subscribe-button">
+                <span style="font-weight: 300; font-size: 0.8em;">Sub to</span><br>
+                <span style="font-weight: bold; font-style: italic;">not An Engineering Newsletter</span>
+            </a>
+            <p style="margin-top: 25px; font-size: 0.75rem; color: #666; max-width: 500px; line-height: 1.5;">
+                I'd love for you to subscribe to my newsletter for engineers who think beyond code—startup lessons, career moves, and honest reflections. It's not big, but it's built with care.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
